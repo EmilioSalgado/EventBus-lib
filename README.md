@@ -11,4 +11,19 @@ Un bus de eventos es una herramienta muy útil y potente, pero el abuso de esta 
 
 * **Agilidad:** gracias a los beneficios mencionados anteriormente, ahorramos muchas líneas de código, clases y lógica de interacción que, al fin y al cabo, se traduce en un menor tiempo de desarrollo. Pero haciendo hincapié en lo anterior, lo que parece ahorrarnos trabajo de desarrollo, si no se hace correctamente y se abusa de ello, se puede convertir en tiempo de depuración; ya que, en el momento en el que algo falla, podríamos desear haberlo hecho de la otra forma.
 
-
+###Ejemplo
+```javascript
+// Class is typically registered by the container.
+class EventBusChangeRecorder {
+  @Subscribe public void recordCustomerChange(ChangeEvent e) {
+    recordChange(e.getChange());
+  }
+}
+// somewhere during initialization
+eventBus.register(new EventBusChangeRecorder());
+// much later
+public void changeCustomer() {
+  ChangeEvent event = getChangeEvent();
+  eventBus.post(event);
+}
+```
